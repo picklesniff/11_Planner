@@ -1,8 +1,8 @@
-import { useState } from "react";
+import useLocalStorage from './useLocalStorageState';
 import { v4 as uuidv4 } from 'uuid';
 
-export default initialPlans => {
-  const [ plans, setPlans ] = useState(initialPlans);
+export const usePlanState = initialPlans => {
+  const [plans, setPlans] = useLocalStorage("plans", initialPlans);
   return {
     plans,
     addPlan: newPlanText => {
