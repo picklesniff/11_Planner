@@ -12,7 +12,7 @@ function EditPlanForm({ id, task, editPlan, toggleEditForm }) {
         reset();
         toggleEditForm();
       }}
-      style={{ marginLeft: "1rem", width: "50%" }}
+      style={{ marginLeft: "1rem", width: "100%" }}
     >
       <TextField
         margin='normal'
