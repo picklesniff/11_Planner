@@ -2,10 +2,10 @@ import { useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 
 export default initialPlans => {
-  const [ plans, setPlans] = useState(initialPlans);
+  const [ plans, setPlans ] = useState(initialPlans);
   return {
     plans,
-    addTodo: newPlanText => {
+    addPlan: newPlanText => {
       setPlans([...plans, { id: uuidv4(), task: newPlanText, completed: false }]);
     },
     removePlan: planId => {

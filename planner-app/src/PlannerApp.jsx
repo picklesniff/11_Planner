@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from "react";
+import usePlanState from "./hooks/usePlanState";
 import PlannerList from "./PlannerList";
 import PlannerForm from "./PlannerForm";
 import Typography from '@mui/material/Typography';
@@ -10,38 +11,18 @@ import { v4 as uuidv4 } from 'uuid';
 
 function PlannerApp() {
     const storedPlans = JSON.parse(window.localStorage.getItem("plans"));
-  
     const initialPlans = storedPlans ? storedPlans : [
       { id: uuidv4(), task: "Notion Review/Update from 8 to 9", completed: false },
       { id: uuidv4(), task: "Run through the emails from 9 to 10", completed: false },
       { id: uuidv4(), task: "Update Obsidian", completed: false },
     ];
-  const [plans, setPlans] = useState(initialPlans);
+  const [plans, addPlan, removePlan, togglePlan, editPlan] = useState(initialPlans);
 
   useEffect(() => {
     window.localStorage.setItem("plans", JSON.stringify(plans));
   }, [plans]);
   //rerender only whn plans upd
 
-  const addPlan = newPlanText => {
-    setPlans([...plans, {id: uuidv4(), task: newPlanText, completed: false}])
-  }
-const removePlan = planId => {
-    const updatedPlans = plans.filter(plan => plan.id !== planId);
-    setPlans(updatedPlans)
-}
-const togglePlan = planId => {
-    const updatedPlans = plans.map(plan =>
-      plan.id === planId ? { ...plan, completed: !plan.completed } : plan
-    );
-    setPlans(updatedPlans);
-  }
-  const editPlan = (planId, newTask) => {
-    const updatedPlans = plans.map(plan =>
-      plan.id === planId ? { ...plan, task: newTask } : plan
-    );
-    setPlans(updatedPlans);
-  }
 
   return (
     <Paper
