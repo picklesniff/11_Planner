@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import Plan from "./Plan";
 import Paper from '@mui/material/Paper';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
+import { PlansContext } from "./contexts/plans.contexs";
 
-function PlannerList({ plans, removePlan, togglePlan, editPlan }) {
+function PlannerList() {
+  const { plans } = useContext(PlansContext)
   if (plans.length)
     return (
       <Paper>
@@ -14,9 +16,6 @@ function PlannerList({ plans, removePlan, togglePlan, editPlan }) {
               <Plan
                 {...plan}
                 key={plan.id}
-                removePlan={removePlan}
-                togglePlan={togglePlan}
-                editPlan={editPlan}
               />
               {i < plans.length - 1 && <Divider />}
             </React.Fragment>

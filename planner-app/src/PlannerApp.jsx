@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PlannerList from "./PlannerList";
 import PlannerForm from "./PlannerForm";
 import Typography from '@mui/material/Typography';
@@ -9,9 +9,6 @@ import Grid from '@mui/material/Grid';
 import { PlansProvider } from "./contexts/plans.contexs";
 
 function PlannerApp() {
-useEffect(() => {
-  window.localStorage.setItem("plans", JSON.stringify(plans));
-}, [plans]);
 
   return (
     <Paper
@@ -31,13 +28,8 @@ useEffect(() => {
       <Grid container justify='center' style={{ marginTop: "1rem" }}>
         <Grid item xs={11} md={8} lg={4}>
           <PlansProvider >
-          <PlannerForm addPlan={addPlan} />
-          <PlannerList
-            plans={plans}
-            removePlan={removePlan}
-            togglePlan={togglePlan}
-            editPlan={editPlan}
-          />
+          <PlannerForm />
+          <PlannerList />
           </PlansProvider>
         </Grid>
       </Grid>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import useToggleState from "./hooks/useToggleState";
 import EditPlanForm from "./EditPlanForm";
 import ListItem from "@mui/material/ListItem";
@@ -8,10 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
+import { PlansContext } from "./contexts/plans.contexs";
 
 
-function Plan({ id, task, completed, removePlan, togglePlan, editPlan }) {
+function Plan({ id, task, completed}) {
   const [isEditing, toggle] = useToggleState(false);
+  const { removePlan, togglePlan, editPlan } = useContext(PlansContext);
   return (
     <ListItem style={{ height: "64px" }}>
       {isEditing ? (

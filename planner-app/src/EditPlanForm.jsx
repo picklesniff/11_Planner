@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import useInputState from "./hooks/useInputState";
 import TextField from "@mui/material/TextField";
+import { PlansContext } from "./contexts/plans.contexs";
 
-function EditPlanForm({ id, task, editPlan, toggleEditForm }) {
+function EditPlanForm({ id, task, toggleEditForm }) {
   const [value, handleChange, reset] = useInputState(task);
+  const { editPlan } = useContext(PlansContext);
   return (
     <form
       onSubmit={e => {

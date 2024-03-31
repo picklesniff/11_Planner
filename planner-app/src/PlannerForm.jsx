@@ -1,10 +1,12 @@
-import React from "react";
+import React, {useContext} from "react";
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import useInputState from "./hooks/useInputState";
+import { PlansContext } from "./contexts/plans.contexs";
 
-function PlannerForm({ addPlan }) {
+function PlannerForm() {
   const [value, handleChange, reset] = useInputState("");
+  const {addPlan} = useContext(PlansContext);
   return (
     <Paper style={{ margin: "1rem 0", padding: "0 1rem" }}>
       <form
