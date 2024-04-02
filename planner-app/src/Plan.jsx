@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, memo } from "react";
 import useToggleState from "./hooks/useToggleState";
 import EditPlanForm from "./EditPlanForm";
 import ListItem from "@mui/material/ListItem";
@@ -11,9 +11,10 @@ import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
 import { DispatchContext } from "./contexts/plans.contexs";
 
 
-function Plan({ id, task, completed}) {
+const Plan = memo(function Plan({ id, task, completed}) {
   const [isEditing, toggle] = useToggleState(false);
   const dispatch = useContext(DispatchContext);
+  console.log('task rerender:', task)
   return (
     <ListItem style={{ height: "64px" }}>
       {isEditing ? (
@@ -51,5 +52,6 @@ function Plan({ id, task, completed}) {
     </ListItem>
   );
 }
+)
 
 export default Plan;

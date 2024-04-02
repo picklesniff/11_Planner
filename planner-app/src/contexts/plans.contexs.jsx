@@ -1,4 +1,5 @@
-import React, { createContext, useReducer } from "react";
+import React, { createContext } from "react";
+import useLocalStorageReducer from "../hooks/useLocalStorageReducer.jsx";
 import plansReducer from "../reducer/plans.reducer.jsx";
 import { v4 as uuidv4 } from "uuid";
 
@@ -16,7 +17,7 @@ export const PlansContext = createContext();
 export const DispatchContext = createContext();
 
 export function PlansProvider({ children }) {
-  const [plans, dispatch] = useReducer(plansReducer, defaultPlans);
+  const [plans, dispatch] = useLocalStorageReducer("plans", defaultPlans, plansReducer);
   return (
     <PlansContext.Provider value={ plans }>
       <DispatchContext.Provider value={ dispatch }> 
