@@ -1,5 +1,5 @@
-import React, { createContext } from "react";
-import { usePlanState } from "../hooks/usePlanState";
+import React, { createContext, useReducer } from "react";
+import plansReducer from "../reducer/plans.reducer.jsx";
 import { v4 as uuidv4 } from 'uuid';
 
 const defaultPlans = [
@@ -11,9 +11,9 @@ const defaultPlans = [
 export const PlansContext = createContext();
 
 export function PlansProvider({ children }) {
-  const plansValues = usePlanState(defaultPlans);
+  const [plans, dispatch] = useReducer(plansReducer, defaultPlans);
   return (
-    <PlansContext.Provider value={plansValues}>
+    <PlansContext.Provider value={{ plans, dispatch }}>
       {children}
     </PlansContext.Provider>
   );

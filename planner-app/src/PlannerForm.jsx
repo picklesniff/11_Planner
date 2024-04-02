@@ -6,13 +6,13 @@ import { PlansContext } from "./contexts/plans.contexs";
 
 function PlannerForm() {
   const [value, handleChange, reset] = useInputState("");
-  const {addPlan} = useContext(PlansContext);
+  const { dispatch } = useContext(PlansContext);
   return (
     <Paper style={{ margin: "1rem 0", padding: "0 1rem" }}>
       <form
         onSubmit={e => {
           e.preventDefault();
-          addPlan(value);
+          dispatch({ type: "ADD", task: value });
           reset();
         }}
       >

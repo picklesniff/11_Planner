@@ -5,12 +5,12 @@ import { PlansContext } from "./contexts/plans.contexs";
 
 function EditPlanForm({ id, task, toggleEditForm }) {
   const [value, handleChange, reset] = useInputState(task);
-  const { editPlan } = useContext(PlansContext);
+  const { dispatch } = useContext(PlansContext);
   return (
     <form
       onSubmit={e => {
         e.preventDefault();
-        editPlan(id, value);
+        dispatch({ type: "EDIT", id: id, newTask: value })
         reset();
         toggleEditForm();
       }}
