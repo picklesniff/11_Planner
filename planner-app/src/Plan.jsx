@@ -8,12 +8,12 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
-import { PlansContext } from "./contexts/plans.contexs";
+import { DispatchContext } from "./contexts/plans.contexs";
 
 
 function Plan({ id, task, completed}) {
   const [isEditing, toggle] = useToggleState(false);
-  const { dispatch } = useContext(PlansContext);
+  const dispatch = useContext(DispatchContext);
   return (
     <ListItem style={{ height: "64px" }}>
       {isEditing ? (

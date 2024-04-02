@@ -6,7 +6,7 @@ import Divider from '@mui/material/Divider';
 import { PlansContext } from "./contexts/plans.contexs";
 
 function PlannerList() {
-  const { plans } = useContext(PlansContext)
+  const plans = useContext(PlansContext)
   if (plans.length)
     return (
       <Paper>
