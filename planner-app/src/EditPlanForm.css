@@ -1,0 +1,59 @@
+.Plan-edit-form {
+  display: flex;
+  align-items: center;
+  color: #e55252;
+}
+.Plan-edit-form label {
+  min-width: 100%;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.Plan-edit-form form {
+  flex-grow: 1;
+  display: flex;
+  margin: 0 -3rem 2px;
+  padding: 2cap 2rem;
+  height: 70px;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  position: relative;
+  transition: opacity 500ms ease-in-out;
+}
+
+.Plan-edit-form input {
+  flex-grow: 1;
+  border: none;
+  background: #e55252;
+  padding: 0 1.5em;
+  font-size: initial;
+  color: white;
+  width: 100%;
+  outline: none;
+}
+
+.Plan-edit-form button {
+  padding: 0 1rem;
+  border: none;
+  background: #ff6666;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background 0.2s ease-out;
+}
+.Plan-edit-form button:hover {
+  background: #c23535;
+}
+.Plan-edit-form input,
+.Plan-edit-form button {
+  font-family: "Quicksand", sans-serif;
+  height: 3rem;
+}
+
+/* UI inspired by Sawsan
+  [source code https://codepen.io/saawsan/pen/jayzeq?editors=1100 ] */

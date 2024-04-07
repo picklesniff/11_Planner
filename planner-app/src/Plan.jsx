@@ -1,57 +1,51 @@
 import React, { useContext, memo } from "react";
 import useToggleState from "./hooks/useToggleState";
 import EditPlanForm from "./EditPlanForm";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
-import ListItemSecondaryAction from "@mui/material/ListItemSecondaryAction";
-import { DispatchContext } from "./contexts/plans.contexs";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faSquare, faSquareCheck,} from "@fortawesome/free-regular-svg-icons";
+import {faPen, faTrash,} from "@fortawesome/free-solid-svg-icons";
+import { DispatchContext } from "./contexts/plans.contexts";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+import "./Plan.css";
 
-
-const Plan = memo(function Plan({ id, task, completed}) {
+const Plan = memo(function Plan({ id, task, completed }) {
   const [isEditing, toggle] = useToggleState(false);
   const dispatch = useContext(DispatchContext);
-  console.log('task rerender:', task)
+
   return (
-    <ListItem style={{ height: "64px" }}>
-      {isEditing ? (
-        <EditPlanForm
-          id={id}
-          task={task}
-          toggleEditForm={toggle}
-        />
-      ) : (
-        <>
-          <Checkbox
-            tabIndex={-1}
-            checked={completed}
-            onClick={() => dispatch({ type: "TOGGLE", id: id})
-            }
+    <TransitionGroup>
+      <CSSTransition key={id} timeout={500} classNames="plan">
+        {isEditing ? (
+          <EditPlanForm
+            id={id}
+            task={task}
+            toggleEditForm={toggle}
+            className="Plan-edit-form"
           />
-          <ListItemText
-            style={{ textDecoration: completed ? "line-through" : "none" }}
-          >
-            {task}
-          </ListItemText>
-          <ListItemSecondaryAction>
-            <IconButton 
-            aria-label='Delete' 
-            onClick={() => dispatch({ type: "REMOVE", id: id})
-            }>
-              <DeleteIcon />
-            </IconButton>
-            <IconButton aria-label='Edit' onClick={toggle}>
-              <EditIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </>
-      )}
-    </ListItem>
+        ) : (
+          <div className={completed ? "Plan completed" : "Plan"}>
+            <FontAwesomeIcon
+              className="checkbox"
+              icon={completed ? faSquareCheck : faSquare}
+              onClick={() => dispatch({ type: "TOGGLE", id: id })}
+            />
+            <li className="Plan-task">{task}</li>
+            <div className="Plan-buttons">
+              <button
+                aria-label="Delete"
+                onClick={() => dispatch({ type: "REMOVE", id: id })}
+              >
+               <FontAwesomeIcon icon={faTrash} />
+              </button>
+              <button aria-label="Edit" onClick={toggle}>
+              <FontAwesomeIcon icon={faPen} />
+              </button>
+            </div>
+          </div>
+        )}
+      </CSSTransition>
+    </TransitionGroup>
   );
-}
-)
+});
 
 export default Plan;
