@@ -9,6 +9,7 @@
     overflow: hidden;
     position: relative;
     transition: opacity 500ms ease-in-out;
+    cursor: grab;
   }
   .Plan-task {
     position: relative;
@@ -60,10 +61,10 @@
     font-size: 1em;
     margin: 0.4em;
     background: none;
-    -webkit-appearance: none;
     cursor: pointer;
     color: #fff;
   }
   
+
    /* UI inspired by Sawsan
   [source code https://codepen.io/saawsan/pen/jayzeq?editors=1100 ] */

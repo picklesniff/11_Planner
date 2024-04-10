@@ -1,31 +1,46 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext } from "react";
 import PlannerForm from "./PlannerForm";
 import Plan from "./Plan";
-import { PlansContext } from "./contexts/plans.contexts";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { DispatchContext, PlansContext } from "./contexts/plans.contexts";
+import SortableList, { SortableItem } from "react-easy-sort";
+import { arrayMoveImmutable } from "array-move";
 import "./PlannerList.css";
 
-function PlannerList() {
-const plans = useContext(PlansContext);
-const nodeRef = useRef(null);
+const PlannerList = () => {
+  const dispatch = useContext(DispatchContext);
+  const plans = useContext(PlansContext);
+
+  const onSortEnd = (oldIndex, newIndex) => {
+    dispatch({
+      type: "SORT",
+      payload: arrayMoveImmutable(plans, oldIndex, newIndex),
+    });
+  };
+
   if (plans.length)
     return (
-        <div className="PlannerList">
-          <h1>
-            Get Things Done! <span>Planner app with custom hooks, context and reducer.</span>
-          </h1>
-          <TransitionGroup className="plan-list" >
-            {plans.map((plan) => (
-              <CSSTransition key={plan.id} timeout={500} classNames="plan" nodeRef={nodeRef}>
-                <ul ref={nodeRef} >
-                  <Plan {...plan} />
-                </ul>
-              </CSSTransition>
+      <div className="PlannerList">
+        <h1>
+          Get Things Done!
+          <span>Planner app with custom hooks, context and reducer.</span>
+        </h1>
+        <SortableList onSortEnd={onSortEnd} draggedItemClassName="dragged">
+          <div className="plan-list">
+            {plans.map((plan, i) => (
+              <div className="plan" key={plan.id}>
+                <SortableItem index={i} key={plan.id}>
+                  <ul>
+                    <Plan {...plan} />
+                  </ul>
+                </SortableItem>
+              </div>
             ))}
-          </TransitionGroup>
-          <PlannerForm />
-        </div>
-      );
+          </div>
+        </SortableList>
+        <PlannerForm />
+      </div>
+    );
   return null;
-}
+};
+
 export default PlannerList;

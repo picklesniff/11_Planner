@@ -6,17 +6,22 @@ import { v4 as uuidv4 } from "uuid";
 const defaultPlans = [
   {
     id: uuidv4(),
-    task: "Obsidian Review/Update from 8 to 8:30am",
+    task: "Add a new task",
     completed: false,
   },
   {
     id: uuidv4(),
-    task: "Team Notion Review/Update from 8:30 to 9am ",
+    task: "Now you can edit it, mark as done or delete it",
     completed: false,
   },
   {
     id: uuidv4(),
-    task: "Run through the emails from 9am to 10:30am",
+    task: "Drag-n-drop tasks to reorganize them in the right order",
+    completed: false,
+  },
+  {
+    id: uuidv4(),
+    task: "All the tasks and updates are saved to the local storage",
     completed: false,
   },
 ];
